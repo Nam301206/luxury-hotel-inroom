@@ -1,21 +1,16 @@
-const sql = require('mssql');
+// db.js
+const sql = require('mssql/msnodesqlv8'); // Thay đổi ở đây để dùng driver Windows
 require('dotenv').config();
 
 const config = {
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    server: process.env.DB_SERVER, 
-    database: process.env.DB_DATABASE,
-    options: {
-        encrypt: false, 
-        trustServerCertificate: true
-    }
+    // Sử dụng chuỗi Connection String để chạy quyền Windows Authentication
+    connectionString: `Driver={SQL Server};Server=${process.env.DB_SERVER};Database=${process.env.DB_DATABASE};Trusted_Connection=yes;`
 };
 
 const poolPromise = new sql.ConnectionPool(config)
     .connect()
     .then(pool => {
-        console.log('✅ Đã kết nối thành công tới SQL Server (LuxuryHotel_InRoom_V2)');
+        console.log('✅ Đã kết nối thành công tới SQL Server Local (Windows Authentication)!');
         return pool;
     })
     .catch(err => {
