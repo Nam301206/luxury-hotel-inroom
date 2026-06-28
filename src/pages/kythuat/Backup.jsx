@@ -1,52 +1,49 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import EmployeeLayout from "../../Layouts/EmployeeLayout";
 
 function Backup() {
+  const navigate = useNavigate();
+  const [message, setMessage] = useState("");
+  const [isRunning, setIsRunning] = useState(false);
+  const [lastBackup, setLastBackup] = useState("Chưa sao lưu");
 
-    const navigate = useNavigate();
+  const handleBackup = () => {
+    setIsRunning(true);
+    setMessage("Đang sao lưu dữ liệu...");
 
-    const [message, setMessage] = useState("");
+    setTimeout(() => {
+      const now = new Date().toLocaleString("vi-VN");
+      setLastBackup(now);
+      setMessage("Sao lưu dữ liệu thành công.");
+      setIsRunning(false);
+    }, 1200);
+  };
 
-    const handleBackup = () => {
+  return (
+    <EmployeeLayout role="kythuat" title="Sao lưu dữ liệu">
+      <section className="panel backup-panel">
+        <button className="card-btn back-btn" onClick={() => navigate("/kythuat")}>
+          Quay lại
+        </button>
 
-        setMessage("Đang sao lưu dữ liệu...");
+        <span className="status-badge success">Sẵn sàng</span>
+        <h3>Sao lưu dữ liệu hệ thống</h3>
+        <p>Chức năng dành cho nhân viên kỹ thuật khi cần backup dữ liệu vận hành.</p>
 
-        setTimeout(() => {
-
-            setMessage("Sao lưu dữ liệu thành công!");
-
-        },3000);
-
-    }
-
-    return (
-
-        <div>
-
-            <h2>SAO LƯU DỮ LIỆU</h2>
-
-            <button onClick={() => navigate("/kythuat")}>
-
-                Quay lại
-
-            </button>
-
-            <br /><br />
-
-            <button onClick={handleBackup}>
-
-                Backup
-
-            </button>
-
-            <br /><br />
-
-            <p>{message}</p>
-
+        <div className="backup-info">
+          <span>Lần sao lưu gần nhất</span>
+          <strong>{lastBackup}</strong>
         </div>
 
-    )
+        <button className="card-btn primary" disabled={isRunning} onClick={handleBackup}>
+          {isRunning ? "Đang xử lý..." : "Sao lưu ngay"}
+        </button>
 
+        {message && <p className="result-message">{message}</p>}
+      </section>
+    </EmployeeLayout>
+  );
 }
 
 export default Backup;

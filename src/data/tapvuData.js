@@ -1,18 +1,31 @@
-const reviews = [
+const tapvuReviews = [
   {
     id: 1,
     room: "101",
-    star: 5,
-    content: "Phòng rất sạch sẽ.",
+    customer: "Nguyễn Văn A",
+    rating: 5,
+    status: "Tốt",
+    comment: "Phòng rất sạch sẽ, nhân viên dọn phòng cẩn thận.",
     date: "20/06/2026",
   },
   {
     id: 2,
     room: "203",
-    star: 4,
-    content: "Dọn phòng khá nhanh.",
+    customer: "Trần Thị B",
+    rating: 4,
+    status: "Cần theo dõi",
+    comment: "Phòng sạch nhưng bổ sung khăn hơi chậm.",
     date: "21/06/2026",
+  },
+  {
+    id: 3,
+    room: "305",
+    customer: "Lê Minh C",
+    rating: 5,
+    status: "Tốt",
+    comment: "Rất hài lòng với chất lượng vệ sinh.",
+    date: "22/06/2026",
   },
 ];
 
-export default reviews;
+export default tapvuReviews;

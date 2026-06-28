@@ -1,41 +1,45 @@
-import { useNavigate } from "react-router-dom";
-import reviews from "../../data/tapvuData";
+import EmployeeLayout from "../../Layouts/EmployeeLayout";
+import tapvuReviews from "../../data/tapvuData";
 
-function Reviews() {
-  const navigate = useNavigate();
-
+function Review() {
   return (
-    <div>
-      <h2>NHẬN XÉT CỦA TÔI</h2>
+    <EmployeeLayout role="tapvu" title="Nhận xét của tôi">
+      <section className="panel">
+        <div className="panel-head">
+          <div>
+            <h3>Danh sách nhận xét</h3>
+            <p>Thông tin đánh giá từ khách hàng về các phòng đã phụ trách.</p>
+          </div>
+          <span className="status-badge success">{tapvuReviews.length} nhận xét</span>
+        </div>
 
-      <button onClick={() => navigate("/")}>Quay lại</button>
+        <div className="review-list">
+          {tapvuReviews.map((review) => (
+            <article className="list-row" key={review.id}>
+              <div className="list-row-header">
+                <div>
+                  <strong>Phòng {review.room}</strong>
+                  <p>{review.customer}</p>
+                </div>
+                <span className={review.status === "Tốt" ? "status-badge success" : "status-badge warning"}>
+                  {review.status}
+                </span>
+              </div>
 
-      <br />
-      <br />
+              <div className="rating-line" aria-label={`${review.rating} trên 5 sao`}>
+                {"★".repeat(review.rating)}
+                <span>{"☆".repeat(5 - review.rating)}</span>
+                <strong>{review.rating}/5</strong>
+              </div>
 
-      <table border="1" cellPadding="10">
-        <thead>
-          <tr>
-            <th>Phòng</th>
-            <th>Số sao</th>
-            <th>Nhận xét</th>
-            <th>Ngày</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {reviews.map((review) => (
-            <tr key={review.id}>
-              <td>{review.room}</td>
-              <td>{review.star}</td>
-              <td>{review.content}</td>
-              <td>{review.date}</td>
-            </tr>
+              <p>{review.comment}</p>
+              <small>Ngày đánh giá: {review.date}</small>
+            </article>
           ))}
-        </tbody>
-      </table>
-    </div>
+        </div>
+      </section>
+    </EmployeeLayout>
   );
 }
 
-export default Reviews;
+export default Review;
