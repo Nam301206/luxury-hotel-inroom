@@ -1,16 +1,68 @@
-# React + Vite
+# Luxury Hotel
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Project duoc chia lai theo chuc nang de de tim va tiep tuc phat trien.
 
-Currently, two official plugins are available:
+## Cau truc thu muc
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- `src/`: ung dung React/Vite chinh.
+- `src/pages/housekeeping/`: man hinh nhan vien tap vu.
+- `src/pages/technician/`: man hinh nhan vien ky thuat.
+- `src/layouts/`: layout dung chung cho giao dien nhan vien.
+- `src/components/`: component React dung chung.
+- `src/data/`: du lieu mock cho giao dien React.
+- `src/services/`: lop service du kien noi API.
+- `src/styles/`: CSS dung cho React app.
+- `static/customer-dashboard/`: giao dien HTML tinh cho khach hang trong phong.
+- `static/manager-dashboard/`: giao dien HTML tinh cho quan ly.
+- `database/`: script SQL tao database.
+- `modules/dat/`: phan frontend/backend Java rieng cua Dat.
+- `public/`: asset public cho Vite.
+- `dist/`: build output da sinh ra, khong nen sua truc tiep.
 
-## React Compiler
+## File chinh
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React entry: `src/main.jsx`
+- React router: `src/App.jsx`
+- Backend API: `server/index.js`
+- Customer static page: `static/customer-dashboard/index.html`
+- Manager static page: `static/manager-dashboard/index.html`
+- Database schema: `database/schema.sql`
 
-## Expanding the ESLint configuration
+## Chay project
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Mo 2 terminal tai thu muc project.
+
+Terminal 1 chay backend API:
+
+```powershell
+npm run server
+```
+
+Backend se chay tai:
+
+```text
+http://localhost:3000
+```
+
+Terminal 2 chay frontend React:
+
+```powershell
+npm run dev
+```
+
+Frontend se chay tai:
+
+```text
+http://localhost:5173
+```
+
+## API hien co
+
+- `GET /api/health`
+- `GET /api/reviews`
+- `GET /api/devices`
+- `GET /api/devices/:id`
+- `GET /api/backups/latest`
+- `POST /api/backups`
+
+Luu y: backend hien dang dung du lieu mock trong `server/index.js`, chua ghi/doc truc tiep tu SQL Server.

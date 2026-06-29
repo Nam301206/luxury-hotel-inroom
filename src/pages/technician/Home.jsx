@@ -1,25 +1,34 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import EmployeeLayout from "../../Layouts/EmployeeLayout";
-import devices from "../../data/kythuatData";
+import EmployeeLayout from "../../layouts/EmployeeLayout";
+import { getDevices } from "../../services/deviceService";
 
 function Home() {
   const navigate = useNavigate();
-  const errorDevices = devices.filter((device) => device.status === "Lỗi");
+  const [devices, setDevices] = useState([]);
+  const [error, setError] = useState("");
+  const errorDevices = devices.filter((device) => device.status === "Loi");
   const okDevices = devices.length - errorDevices.length;
 
+  useEffect(() => {
+    getDevices()
+      .then(setDevices)
+      .catch(() => setError("Khong ket noi duoc backend. Hay chay npm run server."));
+  }, []);
+
   return (
-    <EmployeeLayout role="kythuat" title="Nhân viên Kỹ thuật">
+    <EmployeeLayout role="kythuat" title="Nhan vien Ky thuat">
       <section className="summary-grid">
         <article className="metric-card">
-          <span>Thiết bị ổn định</span>
+          <span>Thiet bi on dinh</span>
           <strong>{okDevices}</strong>
         </article>
         <article className="metric-card danger">
-          <span>Thiết bị có lỗi</span>
+          <span>Thiet bi co loi</span>
           <strong>{errorDevices.length}</strong>
         </article>
         <article className="metric-card">
-          <span>Tổng phòng theo dõi</span>
+          <span>Tong phong theo doi</span>
           <strong>{devices.length}</strong>
         </article>
       </section>
@@ -27,19 +36,21 @@ function Home() {
       <section className="panel">
         <div className="panel-head">
           <div>
-            <h3>Cảnh báo hạ tầng</h3>
-            <p>Theo dõi phòng có sự cố và mở chi tiết khi cần xử lý.</p>
+            <h3>Canh bao ha tang</h3>
+            <p>Theo doi phong co su co va mo chi tiet khi can xu ly.</p>
           </div>
           <button className="card-btn primary" onClick={() => navigate("/devices")}>
-            Xem thiết bị
+            Xem thiet bi
           </button>
         </div>
+
+        {error && <p className="result-message">{error}</p>}
 
         <div className="review-list">
           {errorDevices.map((device) => (
             <article className="list-row" key={device.id}>
               <div className="list-row-header">
-                <strong>Phòng {device.room}</strong>
+                <strong>Phong {device.room}</strong>
                 <span className="status-badge error">{device.severity}</span>
               </div>
               <p>

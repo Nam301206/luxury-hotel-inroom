@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Manrope:wght@400;700&display=swap');
+
+:root {
+    /* Bảng màu chính theo thiết kế Dark Luxury */
+    --bg: #0e0f11;
+    --panel: #16181d;
+    --panel-soft: #1c1f25;
+    --gold: #d8bd8a;
+    --gold-strong: #f3d7a0;
+    --text: #f4f2ee;
+    --muted: #a6adb8;
+    --ok: #2ecf92;
+    --warn: #f3a952;
+    --danger: #ff6f6f;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--gold);
+}
+
+/* Container chính dạng Grid 2 cột */
+.container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+}
+
+/* Các Card (Panel) nội dung */
+.card {
+    background-color: var(--panel);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--panel-soft);
+}
+
+.card-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+/* Nút bấm (Button) */
+.btn {
+    background-color: var(--panel-soft);
+    color: var(--gold-strong);
+    padding: 12px 16px;
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--gold);
+    color: var(--bg);
+}
+
+/* Hệ thống thông báo (Toast Notifications) */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.toast {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    color: #fff;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.toast.success { background-color: var(--ok); }
+.toast.error { background-color: var(--danger); }
+.toast.show { opacity: 1; }

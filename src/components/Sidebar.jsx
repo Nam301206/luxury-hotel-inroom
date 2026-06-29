@@ -3,19 +3,19 @@ import { Link, useLocation } from "react-router-dom";
 function Sidebar({ role }) {
   const location = useLocation();
 
-  const tapvuMenu = [
-    { name: "Trang chủ", path: "/" },
-    { name: "Nhận xét của tôi", path: "/review" },
+  const housekeepingMenu = [
+    { name: "Trang chu", path: "/" },
+    { name: "Nhan xet cua toi", path: "/review" },
   ];
 
-  const kythuatMenu = [
-    { name: "Trang chủ", path: "/kythuat" },
-    { name: "Trạng thái thiết bị", path: "/devices" },
-    { name: "Sao lưu dữ liệu", path: "/backup" },
+  const technicianMenu = [
+    { name: "Trang chu", path: "/kythuat" },
+    { name: "Trang thai thiet bi", path: "/devices" },
+    { name: "Sao luu du lieu", path: "/backup" },
   ];
 
-  const menu = role === "tapvu" ? tapvuMenu : kythuatMenu;
-  const roleName = role === "tapvu" ? "Nhân viên tạp vụ" : "Nhân viên kỹ thuật";
+  const menu = role === "tapvu" ? housekeepingMenu : technicianMenu;
+  const roleName = role === "tapvu" ? "Nhan vien tap vu" : "Nhan vien ky thuat";
 
   return (
     <aside className="sidebar">
@@ -23,22 +23,18 @@ function Sidebar({ role }) {
         <div className="brand-logo">LH</div>
         <div>
           <h1>Luxury Hotel</h1>
-          <p>Hệ thống nhân viên</p>
+          <p>He thong nhan vien</p>
         </div>
       </div>
 
       <div className="role-card">
-        <span>Vai trò hiện tại</span>
+        <span>Vai tro hien tai</span>
         <strong>{roleName}</strong>
       </div>
 
-      <nav className="sidebar-nav" aria-label="Điều hướng chức năng">
+      <nav className="sidebar-nav" aria-label="Dieu huong chuc nang">
         {menu.map((item) => (
-          <Link
-            key={item.path}
-            to={item.path}
-            className={location.pathname === item.path ? "nav-item active" : "nav-item"}
-          >
+          <Link key={item.path} to={item.path} className={location.pathname === item.path ? "nav-item active" : "nav-item"}>
             {item.name}
           </Link>
         ))}

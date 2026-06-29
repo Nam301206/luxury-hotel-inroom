@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import TechnicianHome from "./pages/kythuat/Home";
-import Backup from "./pages/kythuat/Backup";
-import DeviceStatus from "./pages/kythuat/DeviceStatus";
-import RoomDetail from "./pages/kythuat/RoomDetail";
-import Home from "./pages/tapvu/Home";
-import Reviews from "./pages/tapvu/Review";
+import TechnicianHome from "./pages/technician/Home";
+import Backup from "./pages/technician/Backup";
+import DeviceStatus from "./pages/technician/DeviceStatus";
+import RoomDetail from "./pages/technician/RoomDetail";
+import Home from "./pages/housekeeping/Home";
+import Reviews from "./pages/housekeeping/Review";
 
 function App() {
   return (
