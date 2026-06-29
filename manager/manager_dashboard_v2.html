@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Luxury Hotel - Manager Dashboard</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tabler Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+</head>
+
+
+<body>
+<aside class="sidebar">
+  <div class="logo">
+    <div class="brand">LUXURY HOTEL</div>
+    <div class="sub">Manager Dashboard</div>
+  </div>
+  <div class="role-row">
+    <div class="av">QL</div>
+    <div><div class="rn">Nguyễn Văn A</div><div class="rt">Manager</div></div>
+  </div>
+  <nav class="nav">
+    <div class="nl">Tổng quan</div>
+    <button class="ni on" onclick="go('overview',this)"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Tổng quan</button>
+    <div class="nl">Kiểm duyệt</div>
+    <button class="ni" onclick="go('mod',this)"><i class="ti ti-shield-check" aria-hidden="true"></i> Bài đăng<span class="nb" id="nb">4</span></button>
+    <div class="nl">Nhân viên</div>
+    <button class="ni" onclick="go('reviews',this)"><i class="ti ti-message-star" aria-hidden="true"></i> Nhận xét tổng</button>
+    <button class="ni" onclick="go('perf',this)"><i class="ti ti-chart-bar" aria-hidden="true"></i> Hiệu suất NV</button>
+  </nav>
+  
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <div><div class="tt" id="tt">Tổng quan</div><div class="ts" id="ts">Xin chào, Nguyễn Văn A</div></div>
+    <button class="btn bg"><i class="ti ti-refresh" aria-hidden="true"></i> Làm mới</button>
+  </div>
+  <div class="content">
+
+    <div class="sc on" id="sc-overview">
+      <div class="mg">
+        <div class="mc"><div class="ml">Chờ duyệt</div><div class="mv" id="ov-pend">4</div><div class="ms"><span class="dot" style="background:var(--warn)"></span>Cần xem xét</div></div>
+        <div class="mc"><div class="ml">Đã duyệt hôm nay</div><div class="mv">12</div><div class="ms"><span class="dot" style="background:var(--ok)"></span>Bài đăng</div></div>
+        <div class="mc"><div class="ml">Đánh giá dọn phòng</div><div class="mv">38</div><div class="ms"><span class="dot" style="background:var(--gold)"></span>Hôm nay</div></div>
+        <div class="mc"><div class="ml">Điểm trung bình NV</div><div class="mv">2.7</div><div class="ms"><span class="dot" style="background:var(--ok)"></span>/ 3 điểm</div></div>
+      </div>
+      <div class="tw">
+        <div class="th"><span class="tht">Bài chờ duyệt mới nhất</span><button class="btn bg" onclick="go('mod',document.querySelectorAll('.ni')[1])">Xem tất cả <i class="ti ti-arrow-right" style="font-size:11px" aria-hidden="true"></i></button></div>
+        <table><thead><tr><th style="width:22%">Khách</th><th style="width:34%">Nội dung</th><th style="width:10%">Ảnh</th><th style="width:12%">Giờ</th><th style="width:22%">Thao tác</th></tr></thead>
+        <tbody id="ov-tb"></tbody></table>
+      </div>
+    </div>
+
+    <div class="sc" id="sc-mod">
+      <div class="sc-head"><div class="sc-title">Bài đăng</div><div class="sc-sub">Kiểm duyệt nội dung trước khi hiển thị trên bảng chia sẻ</div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <div class="filter-tabs">
+          <button class="ft on" onclick="setFilter('PENDING',this)">Chờ duyệt<span class="ft-count" id="fc-p"></span></button>
+          <button class="ft" onclick="setFilter('APPROVED',this)">Đã duyệt<span class="ft-count" id="fc-a"></span></button>
+          <button class="ft" onclick="setFilter('REJECTED',this)">Từ chối<span class="ft-count" id="fc-r"></span></button>
+          <button class="ft" onclick="setFilter('ALL',this)">Tất cả<span class="ft-count" id="fc-all"></span></button>
+        </div>
+        <div class="sb2"><i class="ti ti-search" style="color:var(--mu);font-size:14px" aria-hidden="true"></i><input type="text" placeholder="Tìm theo tên, nội dung..." oninput="renderMod()"></div>
+      </div>
+      <div class="tw"><table><thead><tr><th style="width:20%">Khách</th><th style="width:32%">Nội dung</th><th style="width:9%">Ảnh</th><th style="width:11%">Giờ</th><th style="width:12%">Trạng thái</th><th style="width:16%">Thao tác</th></tr></thead>
+      <tbody id="mod-tb"></tbody></table></div>
+    </div>
+
+    <div class="sc" id="sc-reviews">
+      <div class="sc-head"><div class="sc-title">Nhận xét tổng hợp</div><div class="sc-sub">Thống kê đánh giá dọn phòng từ khách hàng theo nhân viên tạp vụ</div></div>
+      <div class="sg">
+        <div class="scard"><div class="sch"><div class="sct">Tổng đánh giá hôm nay</div><div class="sci g"><i class="ti ti-star" aria-hidden="true"></i></div></div><div class="scn">38</div><div class="scs">Từ 38 phòng có khách</div></div>
+        <div class="scard"><div class="sch"><div class="sct">Hài lòng (2–3 điểm)</div><div class="sci o"><i class="ti ti-circle-check" aria-hidden="true"></i></div></div><div class="scn">31</div><div class="scs">81.6% tổng đánh giá</div></div>
+        <div class="scard"><div class="sch"><div class="sct">Chưa sạch (1 điểm)</div><div class="sci w"><i class="ti ti-alert-triangle" aria-hidden="true"></i></div></div><div class="scn">7</div><div class="scs">Cần theo dõi thêm</div></div>
+      </div>
+      <div class="tw">
+        <div class="th"><span class="tht">Chi tiết theo nhân viên tạp vụ</span></div>
+        <table><thead><tr><th style="width:22%">Nhân viên</th><th style="width:12%">Tổng</th><th style="width:13%">Sạch (3đ)</th><th style="width:15%">Bình thường (2đ)</th><th style="width:15%">Chưa sạch (1đ)</th><th style="width:23%">Điểm TB</th></tr></thead>
+        <tbody id="rv-tb"></tbody></table>
+      </div>
+    </div>
+
+    <div class="sc" id="sc-perf">
+      <div id="perf-list">
+        <div class="sc-head"><div class="sc-title">Hiệu suất nhân viên</div><div class="sc-sub">Xếp hạng tạp vụ dựa trên điểm đánh giá từ khách hàng</div></div>
+        <div class="tw"><table><thead><tr><th style="width:8%">#</th><th style="width:26%">Nhân viên</th><th style="width:28%">Điểm TB</th><th style="width:14%">Lượt</th><th style="width:14%">Xếp loại</th><th style="width:10%"></th></tr></thead>
+        <tbody id="pf-tb"></tbody></table></div>
+      </div>
+      <div id="perf-detail" style="display:none"></div>
+    </div>
+
+  </div>
+</main>
+
+<div class="modal-bg" id="modal-bg" onclick="closeMod(event)">
+  <div class="modal" id="modal-box">
+    <div class="mh"><div class="mt2">Chi tiết bài đăng</div><button class="mc2" onclick="closeModD()"><i class="ti ti-x" aria-hidden="true"></i></button></div>
+    <div class="mb" id="modal-body"></div>
+  </div>
+</div>
+
+<div class="toast-c" id="tc"></div>
+
+<script src="script.js"></script>
+</body>
